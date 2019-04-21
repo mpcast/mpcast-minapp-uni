@@ -1,16 +1,122 @@
 {
-	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+	"pages": [
 		{
-			"path": "pages/index/index",
+			"path": "pages/landing",
 			"style": {
-				"navigationBarTitleText": "uni-app"
+				"navigationBarTitleText": "育儿柚道",
+				"backgroundTextStyle": "dark",
+				"navigationBarTextStyle": "black",
+				"backgroundColor": "#F5F5F5",
+				"disableScroll": true,
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/featured",
+			"style": {
+				"navigationBarTitleText": "精选",
+				"backgroundTextStyle": "dark",
+				"navigationBarTextStyle": "black",
+				"backgroundColor": "#F5F5F5",
+				"disableScroll": true,
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/category",
+			"style": {
+				"navigationBarTitleText": "类别",
+				"backgroundTextStyle": "dark",
+				"navigationBarTextStyle": "black",
+				"backgroundColor": "#F5F5F5",
+				"disableScroll": true,
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/author",
+			"style": {
+				"navigationBarTitleText": "作者",
+				"navigationBarBackgroundColor": "#F5F5F7",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/index",
+			"style": {
+				"navigationBarTitleText": "类别",
+				"backgroundTextStyle": "dark",
+				"navigationBarTextStyle": "black",
+				"backgroundColor": "#F5F5F5",
+				"disableScroll": true,
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/comment",
+			"style": {
+				"navigationBarTitleText": "评论",
+				"backgroundTextStyle": "dark",
+				"navigationBarTextStyle": "black",
+				"backgroundColor": "#F5F5F5",
+				"disableScroll": true,
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/me",
+			"style": {
+				"navigationBarTitleText": "我的",
+				"backgroundTextStyle": "dark",
+				"navigationBarTextStyle": "black",
+				"backgroundColor": "#F5F5F5",
+				"disableScroll": true,
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/login",
+			"style": {
+				"navigationBarTitleText": "登录",
+				"backgroundTextStyle": "dark",
+				"navigationBarTextStyle": "black",
+				"backgroundColor": "#F5F5F5",
+				"disableScroll": true,
+				"enablePullDownRefresh": false
 			}
 		}
 	],
 	"globalStyle": {
+		"navigationBarTitleText": "育儿柚道",
+		"backgroundTextStyle": "dark",
 		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
+		"backgroundColor": "#F5F5F5",
+		"disableScroll": true,
+		"enablePullDownRefresh": false
+	},
+	"tabBar": {
+		"borderStyle": "white",
+		"backgroundColor": "#FFF",
+		"color": "#717882",
+		"selectedColor": "#a8a5ed",
+		"list": [{
+				"pagePath": "pages/featured",
+				"iconPath": "static/images/icon/icon-featured.png",
+				"selectedIconPath": "static/images/icon/icon-featured--active.png",
+				"text": "精选"
+			},
+			{
+				"pagePath": "pages/index",
+				"iconPath": "static/images/icon/icon-listen.png",
+				"selectedIconPath": "static/images/icon/icon-listen--active.png",
+				"text": "柚道"
+			},
+			{
+				"pagePath": "pages/me",
+				"iconPath": "static/images/icon/icon-user.png",
+				"selectedIconPath": "static/images/icon/icon-user--active.png",
+				"text": "我"
+			}
+		]
 	}
 }

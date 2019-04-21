@@ -1,4 +1,6 @@
 <script>
+	import global from "./utils/global";
+
 	export default {
 		onLaunch: function() {
 			console.log('App Launch')
@@ -12,6 +14,9 @@
 	}
 </script>
 
-<style>
-	/*每个页面公共css */
+<style lang="scss">
+	@import "./scss/base";
+	@import "./scss/animate";
+	@import "./scss/variable";
+	@import "./scss/main";
 </style>
