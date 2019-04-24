@@ -18,7 +18,7 @@ export default class posts extends base {
    * 获取节目列表从全部分类中
    */
   static page (category) {
-    const url = `${this.appService}/post/categories/${category}`
+    const url = `${this.appService}/posts/categories/${category}`
     return new Page(url, this.__before.bind(this), this.__after.bind(this))
   }
 
@@ -28,7 +28,7 @@ export default class posts extends base {
    * @returns {Promise.<*>}
    */
   static async detail (id) {
-    const url = `${this.appService}/post/${id}`
+    const url = `${this.appService}/posts/${id}`
     const data = await this.get(url)
     return data
   }

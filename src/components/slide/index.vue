@@ -13,19 +13,19 @@
           <div class="c-post">
             <div class="c-post__featured-image" @click="showDetail(item.id)">
               <image :src="item.featured_image"
-                     style="width: 120px; height: 173px;" mode="aspectFill"></image>
+                     style="width: 120px; height: 173px;" mode="aspectFill" />
             </div>
             <div class="c-post__title" @click="showDetail(item.id)">
               {{item.title}}
             </div>
-            <div @click="showAuthorDetail(item.author.id)"
+            <div @click="showAuthorDetail(item.author)"
                  style="position: absolute; bottom: 30px; flex-direction: column;"
                  class="u-flex u-justify-center u-align-items-center u-width-100">
               <div class="c-post__author">
-                <image class="c-avatar" :src="item.author.avatar" mode="aspectFill"></image>
+                <image class="c-avatar" :src="item.authorInfo.avatarUrl" mode="aspectFill" />
               </div>
               <div class="c-post__author">
-                {{item.author.user_nicename}}
+                {{item.authorInfo.displayName}}
               </div>
             </div>
 
@@ -68,22 +68,13 @@
         default: "horizontal"
       },
       onTouchStart: {
-        type: Function,
-        default () {
-          return {};
-        }
+        type: Function
       },
       onTouchMove: {
-        type: Function,
-        default () {
-          return {};
-        }
+        type: Function
       },
       onTouchEnd: {
-        type: Function,
-        default () {
-          return {};
-        }
+        type: Function
       }
     },
     data () {
@@ -110,7 +101,7 @@
         width: device.windowWidth,
         height: device.windowHeight,
         initialSlide: 0,
-        speed: 300,
+        // speed: 300,
         timingFunction: "ease",               //  过渡动画速度曲线
         autoplay: 0,                          //  自动播放间隔，设置为0时不自动播放
         directionViewName: "directionClass",   //  对应视图中direction类名
@@ -122,9 +113,9 @@
          * @type {[type]}
          */
         onInit: null,                         //  swiper初始化时执行
-        onTouchStart: null,                   //  手指碰触slide时执行
-        onTouchMove: null,                    //  手指碰触slide并且滑动时执行
-        onTouchEnd: null,                     //  手指离开slide时执行
+        // onTouchStart: null,                   //  手指碰触slide时执行
+        // onTouchMove: null,                    //  手指碰触slide并且滑动时执行
+        // onTouchEnd: null,                     //  手指离开slide时执行
         onSlideChangeStart: null,             //  slide达到过渡条件时执行
         onSlideChangeEnd: null,               //  swiper从一个slide过渡到另一个slide结束时执行
         onTransitionStart: null,              //  过渡时触发
@@ -196,8 +187,7 @@
         //   url: `/pages/detail?id=${id}`
         // });
       },
-      async touchstart (e) {
-
+      touchstart (e) {
         const { onTouchStart, XORY, activeIndex, rectDistance } = this;
         let touch = null;
         if (e.mp !== undefined) {
