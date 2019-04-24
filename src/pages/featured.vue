@@ -23,13 +23,13 @@
     },
     data () {
       return {
-        // initialSlide: 0
+        initialSlide: 0
       };
     },
     computed: {
-      // ...mapState([
-      //   "featured"
-      // ]),
+      ...mapState([
+        "featured"
+      ]),
       slideLength () {
         if (this.featured.list) {
           return this.featured.list.length;
@@ -52,12 +52,12 @@
       // this.load()
     // },
     methods: {
-      // ...mapActions([
-      //   "getFeatured"
-      // ]),
+      ...mapActions([
+        "getFeatured"
+      ]),
       async onLoad () {
         // await auth.login();
-        // await this.getFeatured();
+        await this.getFeatured();
       }
     }
   };

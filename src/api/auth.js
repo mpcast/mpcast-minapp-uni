@@ -123,7 +123,7 @@ export default class Auth extends Base {
      */
     static async checkUserInfo(userInfo) {
         const url = `${this.baseUrl}/wechat/verify`
-        console.log(userInfo)
+        // console.log(userInfo)
         const data = {
             // action: 'check_user_info',
             rawData: userInfo.rawData,

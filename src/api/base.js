@@ -14,7 +14,7 @@ export default class Base {
 	    // this.baseUrl = BASE_URL
 	// }
   static baseUrl = 'http://localhost:5000';
-  // static appService = APP_API
+  static appService = this.baseUrl;
   static getApi = function (version) {
     return `${BASE_URL}/${version}/apps/${APP_ID}`
   }

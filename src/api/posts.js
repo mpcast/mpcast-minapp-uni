@@ -18,9 +18,8 @@ export default class posts extends base {
    * 获取节目列表从全部分类中
    */
   static page (category) {
-    const url = `${this.appService}/posts?status=publish&category=${category}&rand=true`
+    const url = `${this.appService}/post/categories/${category}`
     return new Page(url, this.__before.bind(this), this.__after.bind(this))
-    // return new MyPage(url)
   }
 
   /**
@@ -29,7 +28,7 @@ export default class posts extends base {
    * @returns {Promise.<*>}
    */
   static async detail (id) {
-    const url = `${this.appService}/posts/${id}`
+    const url = `${this.appService}/post/${id}`
     const data = await this.get(url)
     return data
   }
@@ -40,7 +39,7 @@ export default class posts extends base {
    * @returns {Promise.<*>}
    */
   static async findByAuthor (author) {
-    const url = `${this.appService}/posts?author=${author}&type=page&status=publish`
+    const url = `${this.appService}/post?author=${author}&type=page&status=publish`
     // const data = await this.get(url, {author: author})
     return new Page(url, this.__before.bind(this), this.__after.bind(this))
   }

@@ -1,5 +1,5 @@
 // import fly from '@/utils/request'
-// import tips from './tips'
+import tips from './tips'
 import global from './global.js'
 // HTTP 请求工具类
 export default class http {
@@ -13,7 +13,7 @@ export default class http {
             data,
             method
         }
-        // tips.loading()
+        tips.loading()
 
         const [error, res] = await uni.request(requestOptions)
         // console.log(error)

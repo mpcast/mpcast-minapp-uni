@@ -128,14 +128,18 @@ export default class Tips {
       return
     }
     this.isLoading = true
-    if (wx.showLoading) {
-      wx.showLoading({
-        title: title,
-        mask: true
-      })
-    } else {
-      wx.showNavigationBarLoading()
-    }
+    // if (wx.showLoading) {
+    //   wx.showLoading({
+    //     title: title,
+    //     mask: true
+    //   })
+    // } else {
+    //   wx.showNavigationBarLoading()
+    // }
+    uni.showLoading({
+      title,
+      mask: true
+    })
   }
 
   /**
@@ -144,11 +148,12 @@ export default class Tips {
   static loaded () {
     if (this.isLoading) {
       this.isLoading = false
-      if (wx.hideLoading) {
-        wx.hideLoading()
-      } else {
-        wx.hideNavigationBarLoading()
-      }
+      // if (wx.hideLoading) {
+      //   wx.hideLoading()
+      // } else {
+      //   wx.hideNavigationBarLoading()
+      // }
+      uni.hideLoading()
     }
   }
 

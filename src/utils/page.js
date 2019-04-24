@@ -45,8 +45,11 @@ export default class Page {
     try {
       Object.assign(param, args)
       const data = await http.get(this.url, param)
+      // console.log('page ....sksksks')
+      // console.log(data);
+      // console.log('-s-s-s-s-data')
       // 底部判断
-      if (data.data === undefined || data.data === null || data.data.length < 1) {
+      if (data.result === undefined || data.result === null || data.result.length < 1) {
         // console.log('data is null')
         if (this.toClear) {
           this.clear()
@@ -57,22 +60,22 @@ export default class Page {
       }
       this.empty = false
       // 前置处理数据
-      await this.__before(data.data)
+      await this.__before(data.result)
       // 设置数据
       if (this.toClear) {
         // console.log('clear')
-        this.list = data.data
+        this.list = data.result
         this.toClear = false
       } else {
         // console.log('data...')
-        this.list = this.list.concat(data.data)
+        this.list = this.list.concat(data.result)
         // console.log(JSON.stringify(this.list))
         // this.__after(data.data)
       }
 
       this.start++
       // this.start += this.count
-      if (data.data.length < this.pagesize) {
+      if (data.result.length < this.pagesize) {
         this.reachBottom = true
       }
       return this

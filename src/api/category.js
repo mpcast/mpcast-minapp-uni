@@ -1,11 +1,11 @@
 /* eslint-disable func-call-spacing,no-unexpected-multiline,no-unused-vars,no-unused-vars */
-import base from './base'
+import Base from './base'
 import Page from '@/utils/page'
 import moment from 'moment'
 
 moment.locale('zh-cn')
 
-export default class category extends base {
+export default class Category extends Base {
   /**
    * 获取节目列表从全部分类中
    */
