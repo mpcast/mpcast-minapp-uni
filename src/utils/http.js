@@ -16,19 +16,11 @@ export default class http {
         tips.loading()
 
         const [error, res] = await uni.request(requestOptions)
-        // console.log(error)
-        // console.log(res)
-        // console.log(data)
-        // const {data} = {...res}
-        console.log(error)
-        console.log(res)
         if (this.isSuccess(res)) {
-            console.log(res.data)
             return res.data
         } else {
             throw this.requestException(res)
         }
-        // console.log(data)
     }
 
     /**

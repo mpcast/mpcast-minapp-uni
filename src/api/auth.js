@@ -27,17 +27,17 @@ export default class Auth extends Base {
         if (token) {
             try {
                 const {result} = await this.checkToken()
-                if (result === 'ok') {
+                if (result && result === 'ok') {
                     return true
                 }
                 return false
             } catch (e) {
                 console.warn('Check token fail', token)
-                await this.doLogin()
+                return await this.doLogin()
             }
         } else {
             console.warn('Token not exists', token)
-            await this.doLogin()
+            return await this.doLogin()
         }
     }
 

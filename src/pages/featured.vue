@@ -13,7 +13,6 @@
   import Slide from "@/components/slide";
   import SlideItem from "@/components/slide/item";
   import PlayFab from "@/components/play-fab";
-  import auth from "@/api/auth";
 
   export default {
     components: {
@@ -42,21 +41,11 @@
         return 0;
       }
     },
-
-    // mounted () {
-      // this.load();
-      // await auth.user()
-    // },
-    // onLoad () {
-    //   this.load();
-      // this.load()
-    // },
     methods: {
       ...mapActions([
         "getFeatured"
       ]),
       async onLoad () {
-        // await auth.login();
         await this.getFeatured();
       }
     }

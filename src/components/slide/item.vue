@@ -1,7 +1,7 @@
 <template>
     <div class="c-slide-item">
         <div class="c-slide-item__content">
-            <slot></slot>
+            <slot />
         </div>
     </div>
 </template>

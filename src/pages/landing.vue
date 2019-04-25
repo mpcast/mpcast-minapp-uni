@@ -112,8 +112,8 @@
                     }
                 });
             },
-            async onLoad() {
-                const login = await authApi.login()
+            onLoad() {
+                const login = authApi.login()
                 if (login) {
                     uni.switchTab({
                         url: '/pages/featured'
@@ -137,14 +137,14 @@
 
     .banner {
         position: absolute;
-        top: 300rpx;
-        width: 750rpx;
-        height: 266rpx;
+        top: 300 rpx;
+        width: 750 rpx;
+        height: 266 rpx;
     }
 
     .background {
-        width: 464rpx;
-        height: 269rpx;
+        width: 464 rpx;
+        height: 269 rpx;
         justify-content: center;
         align-items: center;
         text-align: center;

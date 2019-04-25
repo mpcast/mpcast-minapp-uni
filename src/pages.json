@@ -53,6 +53,17 @@
 			}
 		},
 		{
+			"path": "pages/detail",
+			"style": {
+				"navigationBarTitleText": "采撷播",
+				"backgroundTextStyle": "dark",
+				"navigationBarTextStyle": "black",
+				"backgroundColor": "#F5F5F5",
+				"disableScroll": true,
+				"enablePullDownRefresh": false
+			}
+		},
+		{
 			"path": "pages/comment",
 			"style": {
 				"navigationBarTitleText": "评论",
