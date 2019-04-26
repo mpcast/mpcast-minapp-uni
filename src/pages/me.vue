@@ -1,3 +1,63 @@
+<template>
+  <div class="o-me">
+    <div class="c-me-profile c-panel">
+      <div class="c-me-profile__avatar">
+        <image
+          class="u-icon u-icon-xl u-icon-round animated fadeIn"
+          mode="aspectFill"
+          :src="profile.avatarUrl"></image>
+      </div>
+      <div class="c-me-profile__username">{{profile.displayName}}</div>
+    </div>
+    <div class="c-panel">
+      <!--<div class="c-cell ">-->
+        <!--<div class="c-cell__bd u-text-mute">我的主页(近期开放)</div>-->
+        <!--<div class="c-cell__ft u-text-mute"></div>-->
+      <!--</div>-->
+
+      <div class="c-cell c-cell--access">
+        <div class="c-cell__bd">我的点评</div>
+        <div class="c-cell__ft u-text-mute u-text-xsmall">近期开放</div>
+      </div>
+      <div class="c-cell c-cell--access">
+        <div class="c-cell__bd">我喜欢的</div>
+        <div class="c-cell__ft u-text-mute u-text-xsmall">近期开放</div>
+      </div>
+      <div class="c-cell c-cell--access">
+        <div class="c-cell__bd">最近浏览的</div>
+        <div class="c-cell__ft u-text-mute u-text-xsmall">近期开放</div>
+      </div>
+    </div>
+    <div class="u-m-large u-flex u-justify-center u-align-items-center u-text-tiny u-text-mute"
+         style="flex-direction: column">
+      <div style="letter-spacing: 2px;"></div>
+    </div>
+  </div>
+</template>
+<script>
+  import userApi from '@/api/users'
+  import Tips from "@/utils/tips";
+
+  export default {
+    components: {},
+    data () {
+      return {
+        profile: {}
+      }
+
+    },
+    mounted () {
+      this.load()
+    },
+    methods: {
+      async load () {
+        this.profile = await userApi.me()
+        console.log(this.profile);
+        Tips.loaded()
+      }
+    }
+  }
+</script>
 <style lang="scss">
   @import "../scss/variable";
 
@@ -364,60 +424,3 @@
   }
 
 </style>
-<template>
-  <div class="o-me">
-    <div class="c-me-profile c-panel">
-      <div class="c-me-profile__avatar">
-        <image
-          class="u-icon u-icon-xl u-icon-round animated fadeIn"
-          mode="aspectFill"
-          :src="profile.avatar"></image>
-      </div>
-      <div class="c-me-profile__username">{{profile.user_nicename}}</div>
-    </div>
-    <div class="c-panel">
-      <!--<div class="c-cell ">-->
-        <!--<div class="c-cell__bd u-text-mute">我的主页(近期开放)</div>-->
-        <!--<div class="c-cell__ft u-text-mute"></div>-->
-      <!--</div>-->
-
-      <div class="c-cell c-cell--access">
-        <div class="c-cell__bd">我的点评</div>
-        <div class="c-cell__ft u-text-mute u-text-xsmall">近期开放</div>
-      </div>
-      <div class="c-cell c-cell--access">
-        <div class="c-cell__bd">我喜欢的</div>
-        <div class="c-cell__ft u-text-mute u-text-xsmall">近期开放</div>
-      </div>
-      <div class="c-cell c-cell--access">
-        <div class="c-cell__bd">最近浏览的</div>
-        <div class="c-cell__ft u-text-mute u-text-xsmall">近期开放</div>
-      </div>
-    </div>
-    <div class="u-m-large u-flex u-justify-center u-align-items-center u-text-tiny u-text-mute"
-         style="flex-direction: column">
-      <div style="letter-spacing: 2px;"></div>
-    </div>
-  </div>
-</template>
-<script>
-  import userApi from '@/api/users'
-
-  export default {
-    components: {},
-    data () {
-      return {
-        profile: {}
-      }
-
-    },
-    mounted () {
-      this.load()
-    },
-    methods: {
-      async load () {
-        this.profile = await userApi.me()
-      }
-    }
-  }
-</script>

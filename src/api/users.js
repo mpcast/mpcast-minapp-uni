@@ -83,7 +83,7 @@ export default class Users extends Base {
     const url = `${this.usersApi}/me`
     try {
       const data = await this.get(url)
-      return data
+      return data.result
     } catch (e) {
       return false
     }
