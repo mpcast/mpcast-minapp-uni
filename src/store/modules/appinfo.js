@@ -24,8 +24,8 @@ const actions = {
       return
     }
     let options = null
-    if (!Object.is(appInfo.options, undefined)) {
-      options = appInfo.options
+    if (!Object.is(appInfo.result, undefined)) {
+      options = appInfo.result
     }
     if (options) {
       commit('SET_APP_LAYOUT', options.layout)

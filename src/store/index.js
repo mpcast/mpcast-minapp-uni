@@ -8,14 +8,14 @@ import postApi from "@/api/posts";
 import Tips from "@/utils/tips";
 import http from "@/utils/http";
 
-// import appinfo from "./modules/appinfo";
+import appinfo from "./modules/appinfo";
 // import audio from './modules/audio'
 
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
     modules: {
-        // appinfo
+        appinfo
         // audio
     },
     state: {
@@ -56,31 +56,44 @@ const store = new Vuex.Store({
             }
         },
         async getFeatured({commit}) {
-            const page = postApi.page("featured");
-            const pageData = await page.next();
-            const data = await http.get(page.url)
-            if (pageData.list) {
+            const data = await postApi.getByCategory("featured");
+            // console.log(data)
+            // const pageData = await page.next();
+            // const data = await http.get(page.url)
+            // if (pageData.list) {
+            //     let pageData = {
+            //         list: []
+            //     }
+            //     pageData.list = pageData.list.concat(data.result)
+            //
+            // commit("SET_FEATURED", pageData);
+            // }
+            if (data.result) {
                 let pageData = {
                     list: []
                 }
-                pageData.list = pageData.list.concat(data.result)
-                //
+                pageData.list = pageData.list.concat(data.result);
                 commit("SET_FEATURED", pageData);
                 Tips.loaded()
             }
         },
         async getPopular({commit}, pagesize = 6) {
-            const page = postApi.page("popular");
-            const pageData = await page.next({pagesize: pagesize});
+            const data = await postApi.getByCategory("popular");
+            // const pageData = await page.next({pagesize: pagesize});
             // if (pageData.list) {
-            commit("SET_POPULAR", pageData);
+            // commit("SET_POPULAR", pageData);
             // }
+            commit("SET_POPULAR", data.result);
+            Tips.loaded()
         },
         async getNews({commit}) {
-            const page = postApi.page("new");
-            const pageData = await page.next();
+            // const page = postApi.page("new");
+            // const pageData = await page.next();
             // if (pageData.list) {
-            commit("SET_NEWS", pageData);
+            const data = await postApi.getByCategory("new");
+
+            commit("SET_NEWS", data.result);
+            Tips.loaded()
             // }
         },
         async getPostsFromCategory({commit}) {

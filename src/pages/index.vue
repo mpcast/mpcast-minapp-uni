@@ -1,3 +1,215 @@
+<template>
+  <div>
+    <!--
+    <div class="c-topbar">
+      <button class="u-m-small c-btn c-btn--flat c-btn--small u-flex u-align-items-center "
+              style="border: 1px solid #ededed; border-radius: 4px; text-align: left; background: #f5f5f5;">
+        <image
+          class="u-icon u-icon-small animated fadeIn u-mr-small"
+          mode="aspectFill"
+          src="/static/images/icons/icon-find.svg"></image>
+        检索
+      </button>
+    </div>
+   -->
+    <div style="position: relative; height: 280px;">
+
+      <ad-swiper v-model="swiper" v-if="swiper" />
+
+      <div class="u-m-medium u-flex"
+           style="background: #fff; border-radius: 6px;  position:relative; top: 180px; z-index: 2 !important; box-shadow: 0 2px 10px 0 rgba(0,0,0,0.08);">
+        <div class="c-category"
+             v-for="(item, index) in categories" :key="item.id" @click="showCategoryDetail(item.slug)" v-if="categories">
+          <image class="c-category__icon"
+                 :src="item.featured_image"
+                 mode="aspectFit"></image>
+          <span>
+            {{item.name}}
+          </span>
+        </div>
+      </div>
+    </div>
+<!--    <div class="c-section__title">
+      热播
+    </div>
+    <div class="c-popular" v-if="popular">
+      <div class="c-popular-card"
+           v-for="item of popular.list" :key="item.id"
+           style="position: relative;">
+        <div class="c-popular-card__body">
+          <div class="c-popular-card__title"  @click="showDetail(item.id)">
+            {{item.title}}
+          </div>
+          <div class="c-popular-card__footer">
+            <div class="c-popular-card__footer-author"  @click="showAuthorDetail(item.author.id)">
+              <image class="c-avatar is-medium u-mr-small" :src="item.author.avatar" mode="aspectFill" ></image>
+              <span class="u-text-small u-text-mute" style="font-weight: 300;">
+                {{item.author.user_nicename}}
+              </span>
+            </div>
+            <div class="c-popular-card__footer-action"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="u-flex u-align-items-center u-justify-center" v-else>
+      <button class="c-btn c-btn&#45;&#45;flat c-btn&#45;&#45;large c-btn&#45;&#45;loading"></button>
+    </div>-->
+
+    <div class="c-section__title">
+      最新
+    </div>
+    <div class="c-news u-mb-medium" v-if="news">
+      <div class="c-panel c-panel--without-margin-top"
+           v-for="(item, index) in news" :key="item.id">
+        <div class="c-card" @click="showDetail(item.id)">
+          <div class="c-card__thumb">
+            <image class="c-card__img" :src="item.featured_image"
+                   mode="aspectFit"></image>
+          </div>
+          <div class="c-card__detail u-mt-medium">
+            <view class="c-card__detail-row">
+              <view class=" ">
+                {{item.title}}
+              </view>
+            </view>
+          </div>
+          <view class="c-card__detail u-mt-small u-text-mute" style="font-weight: 300;">
+            <view class="c-card__right-col ">
+              {{item.updatedAt}}
+            </view>
+            <view class="c-card__left-col">{{item.likeCount}} 人喜欢</view>
+          </view>
+        </div>
+      </div>
+    </div>
+    <div class="u-flex u-align-items-center u-justify-center" v-else>
+      <button class="c-btn c-btn--flat c-btn--large c-btn--loading"></button>
+    </div>
+    <play-fab/>
+
+    <Loadmore :page.sync="page"/>
+
+  </div>
+</template>
+<script>
+  // import wx from 'wx'
+  import {mapState, mapActions} from 'vuex'
+  import AdSwiper from '@/components/ad-swiper'
+  import Loadmore from '@/components/loadmore'
+  // import auth from '@/api/auth'
+  import pagination from '@/mixins/pagination'
+  import postApi from '@/api/posts'
+  import PlayFab from '@/components/play-fab'
+
+  export default {
+    mixins: [pagination],
+    data () {
+      return {
+        motto: 'Hello World',
+        userInfo: {},
+        page: {
+          reachBottom: false,
+          added: [],
+          list: []
+        }
+      }
+    },
+    components: {
+      AdSwiper,
+      Loadmore,
+      PlayFab
+    },
+    onShow () {
+      this.refreshAppInfo()
+    },
+    mounted () {
+      // this.refreshAppInfo()
+      // auth.user()
+      // this.refresh()
+      // this.getNewsPage()
+      this.refresh()
+      // this.getNewsPage()
+    },
+    computed: {
+      swiper () {
+        return this.$store.getters.swiper
+      },
+      ...mapState([
+        'application',
+        'categories',
+        'popular',
+        'news'
+      ])
+    },
+    /**
+     * 下拉刷新
+     */
+    async onPullDownRefresh () {
+      // await this.reload()
+      // await this.getPopular()
+      // wx.stopPullDownRefresh()
+    },
+    methods: {
+      ...mapActions([
+        'getAppInfo',
+        'getCategories',
+        'getPopular',
+        'getNews'
+      ]),
+      showAuthorDetail (authorId) {
+        // wx.navigateTo({
+        //   url: `/pages/author?id=${authorId}`
+        // })
+        this.$router.push({
+          path: "/pages/author",
+          query: {
+            id: authorId
+          }
+        });
+      },
+      showDetail (id) {
+        this.$router.push({
+          path: "/pages/detail",
+          query: {
+            id: id
+          }
+        });
+        // wx.navigateTo({
+        //   url: `/pages/detail?id=${id}`
+        // })
+      },
+      showCategoryDetail (slug) {
+        this.$router.push({
+          path: "/pages/category",
+          query: {
+            slug: slug
+          }
+        });
+        // wx.navigateTo({
+        //   url: `/pages/category?slug=${slug}`
+        // })
+      },
+      async refreshAppInfo () {
+        await this.getAppInfo()
+      },
+     refresh () {
+        this.getAppInfo()
+        this.getCategories()
+        // await this.getPopular()
+        this.getNews()
+        // this.getNewsPage()
+        // wx.stopPullDownRefresh()
+      },
+      async getNewsPage () {
+        // this.page = postApi.getByCategory('new')
+        // await this.next()
+        // console.log(this.page);
+      }
+    }
+  }
+</script>
+
 <style lang="scss">
   @import "../scss/variable";
 
@@ -149,214 +361,3 @@
 
   }
 </style>
-<template>
-  <div>
-    <!--
-    <div class="c-topbar">
-      <button class="u-m-small c-btn c-btn--flat c-btn--small u-flex u-align-items-center "
-              style="border: 1px solid #ededed; border-radius: 4px; text-align: left; background: #f5f5f5;">
-        <image
-          class="u-icon u-icon-small animated fadeIn u-mr-small"
-          mode="aspectFill"
-          src="/static/images/icons/icon-find.svg"></image>
-        检索
-      </button>
-    </div>
-   -->
-    <div style="position: relative; height: 280px;">
-
-      <ad-swiper v-model="swiper" v-if="swiper" />
-
-      <div class="u-m-medium u-flex"
-           style="background: #fff; border-radius: 6px;  position:relative; top: 180px; z-index: 2 !important; box-shadow: 0 2px 10px 0 rgba(0,0,0,0.08);">
-        <div class="c-category"
-             v-for="(item, index) in categories" :key="item.id" @click="showCategoryDetail(item.slug)" v-if="categories">
-          <image class="c-category__icon"
-                 :src="item.featured_image"
-                 mode="aspectFit"></image>
-          <span>
-            {{item.name}}
-          </span>
-        </div>
-      </div>
-    </div>
-<!--    <div class="c-section__title">
-      热播
-    </div>
-    <div class="c-popular" v-if="popular">
-      <div class="c-popular-card"
-           v-for="item of popular.list" :key="item.id"
-           style="position: relative;">
-        <div class="c-popular-card__body">
-          <div class="c-popular-card__title"  @click="showDetail(item.id)">
-            {{item.title}}
-          </div>
-          <div class="c-popular-card__footer">
-            <div class="c-popular-card__footer-author"  @click="showAuthorDetail(item.author.id)">
-              <image class="c-avatar is-medium u-mr-small" :src="item.author.avatar" mode="aspectFill" ></image>
-              <span class="u-text-small u-text-mute" style="font-weight: 300;">
-                {{item.author.user_nicename}}
-              </span>
-            </div>
-            <div class="c-popular-card__footer-action"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="u-flex u-align-items-center u-justify-center" v-else>
-      <button class="c-btn c-btn&#45;&#45;flat c-btn&#45;&#45;large c-btn&#45;&#45;loading"></button>
-    </div>-->
-
-    <div class="c-section__title">
-      最新
-    </div>
-    <div class="c-news u-mb-medium" v-if="page">
-      <div class="c-panel c-panel--without-margin-top"
-           v-for="(item, index) in page.list" :key="item.id">
-        <div class="c-card" @click="showDetail(item.id)">
-          <div class="c-card__thumb">
-            <image class="c-card__img" :src="item.featured_image"
-                   mode="aspectFit"></image>
-          </div>
-          <div class="c-card__detail u-mt-medium">
-            <view class="c-card__detail-row">
-              <view class=" ">
-                {{item.title}}
-              </view>
-            </view>
-          </div>
-          <view class="c-card__detail u-mt-small u-text-mute" style="font-weight: 300;">
-            <view class="c-card__right-col ">
-              {{item.modified}}
-            </view>
-            <view class="c-card__left-col">{{item.like_count}} 人喜欢</view>
-          </view>
-        </div>
-      </div>
-    </div>
-    <div class="u-flex u-align-items-center u-justify-center" v-else>
-      <button class="c-btn c-btn--flat c-btn--large c-btn--loading"></button>
-    </div>
-    <play-fab/>
-
-    <Loadmore :page.sync="page"/>
-
-  </div>
-</template>
-<script>
-  // import wx from 'wx'
-  import {mapState, mapActions} from 'vuex'
-  import AdSwiper from '@/components/ad-swiper'
-  import Loadmore from '@/components/loadmore'
-  // import auth from '@/api/auth'
-  import pagination from '@/mixins/pagination'
-  import postApi from '@/api/posts'
-  import PlayFab from '@/components/play-fab'
-
-  export default {
-    mixins: [pagination],
-    data () {
-      return {
-        motto: 'Hello World',
-        userInfo: {},
-        page: {
-          reachBottom: false,
-          added: [],
-          list: []
-        }
-      }
-    },
-    components: {
-      AdSwiper,
-      Loadmore,
-      PlayFab
-    },
-    onShow () {
-      this.refreshAppInfo()
-    },
-    mounted () {
-      // this.refreshAppInfo()
-      // auth.user()
-      // this.refresh()
-      // this.getNewsPage()
-      this.refresh()
-      // this.getNewsPage()
-    },
-    computed: {
-      swiper () {
-        return this.$store.getters.swiper
-      },
-      ...mapState([
-        'application',
-        'categories',
-        'popular',
-        'news'
-      ])
-    },
-    /**
-     * 下拉刷新
-     */
-    async onPullDownRefresh () {
-      // await this.reload()
-      // await this.getPopular()
-      // wx.stopPullDownRefresh()
-    },
-    methods: {
-      ...mapActions([
-        'getAppInfo',
-        'getCategories',
-        'getPopular',
-        'getNews'
-      ]),
-      showAuthorDetail (authorId) {
-        // wx.navigateTo({
-        //   url: `/pages/author?id=${authorId}`
-        // })
-        this.$router.push({
-          path: "/pages/author",
-          query: {
-            id: authorId
-          }
-        });
-      },
-      showDetail (id) {
-        this.$router.push({
-          path: "/pages/detail",
-          query: {
-            id: id
-          }
-        });
-        // wx.navigateTo({
-        //   url: `/pages/detail?id=${id}`
-        // })
-      },
-      showCategoryDetail (slug) {
-        this.$router.push({
-          path: "/pages/category",
-          query: {
-            slug: slug
-          }
-        });
-        // wx.navigateTo({
-        //   url: `/pages/category?slug=${slug}`
-        // })
-      },
-      async refreshAppInfo () {
-        await this.getAppInfo()
-      },
-      async refresh () {
-        await this.getAppInfo()
-        await this.getCategories()
-        // await this.getPopular()
-        // await this.getNews()
-        await this.getNewsPage()
-        // wx.stopPullDownRefresh()
-      },
-      async getNewsPage () {
-        this.page = postApi.page('new')
-        await this.next()
-      }
-    }
-  }
-</script>
-

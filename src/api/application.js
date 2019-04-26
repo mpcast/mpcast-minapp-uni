@@ -5,7 +5,8 @@ export default class Application extends Base {
    * 获取应用配置
    */
   static async getInfo() {
-    const url = `${this.appService}?key=_wxapp`
+    // const url = `${this.appService}?key=_wxapp`
+    const url = `${this.appService}/options/minapp`
     return await this.get(url)
   }
 

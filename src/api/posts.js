@@ -17,11 +17,26 @@ export default class posts extends base {
   /**
    * 获取节目列表从全部分类中
    */
-  static page (category) {
-    const url = `${this.appService}/posts/categories/${category}`
+  static page () {
+    // const url = `${this.appService}/posts/categories/${category}`
+    const url = `${this.appService}/posts`
     return new Page(url, this.__before.bind(this), this.__after.bind(this))
   }
 
+  /**
+   * 按类别直接获取
+   * @param category
+   * @returns {Promise<void>}
+   */
+  static async getByCategory(category) {
+    const url = `${this.appService}/posts/categories/${category}`
+    const data = await this.get(url)
+    // 处理日期
+    data.result.forEach((item) => {
+      item.updatedAt = moment(item.updatedAt).fromNow()
+    })
+    return data
+  }
   /**
    * 获取节目信息
    * @param id

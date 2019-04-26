@@ -43,7 +43,7 @@ export default class Category extends Base {
   static async list () {
     const url = `${this.appService}/categories`
     const data = await this.get(url)
-    return data.categories
+    return data.result
   }
 
   static async loadEpisodes (item) {
