@@ -1621,7 +1621,7 @@
         }
         // console.log(commentData)
         // console.log(commentData)
-        const res = await postsApi.repliesNew(this.postId, commentData)
+        const res = await postsApi.commentsNew(this.postId, commentData)
         // console.log(res)
         if (res) {
           await Tips.success('成功发表评论')

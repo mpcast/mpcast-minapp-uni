@@ -61,16 +61,16 @@
                     </div>
                 </div>
             </div>
-            <div class="c-replies " id="comments">
+            <div class="c-comments " id="comments">
                 <div class="c-panel-title u-flex u-justify-between">
                     <span class="u-text-large u-text-dark u-text-bold">评价</span>
-                    <span>（{{repliesPage}})</span>
+                    <span>（{{commentsPage}})</span>
                 </div>
 
                 <div v-if="hasComments">
                     <swiper style="height: 210px;" @change="bindSwiperChange">
                         <swiper-item class="c-swiper__item"
-                                     v-for="(item, index) in replies.data"
+                                     v-for="(item, index) in comments.items"
                                      :key="item.id">
                             <comment-card :comment="item"/>
                         </swiper-item>
@@ -81,7 +81,7 @@
                 </div>
                 <button class=" c-btn c-btn--flat c-write-button" @click="handleAddComment">
                     <span class="u-ml-small u-mr-small">写评价</span>
-                    <image class="u-icon-small" src="/static/images/pencil.png"></image>
+                    <image class="u-icon-small" src="/static/images/pencil.png"/>
                 </button>
             </div>
             <player
@@ -116,7 +116,7 @@
         data() {
             return {
                 detail: {},
-                replies: {
+                comments: {
                     data: []
                 },
                 coverWidth: device.windowWidth,
@@ -130,7 +130,8 @@
                 touchStartY: 0,
                 translateY: 0,
                 position: 40,
-                currentGesture: 0
+                currentGesture: 0,
+                hasComments: false,
             }
         },
 
@@ -147,7 +148,7 @@
                 return false
             },
             style() {
-                return `height: ${device.windowHeight + 100}px;`
+                return `height: ${device.windowHeight + 50}px;`
             },
             /**
              * @return {string}
@@ -167,17 +168,17 @@
             coverStyle() {
                 return `width: ${this.coverWidth}px;height: 200px;`
             },
-            repliesPage() {
-                if (this.replies && !Object.is(this.replies.data, undefined)) {
+            commentsPage() {
+                if (this.comments && !Object.is(this.comments.items, undefined)) {
                     const page = this.current + 1
-                    return `${page}/${this.replies.data.length}`
+                    return `${page}/${this.comments.items.length}`
                 } else {
                     return ''
                 }
             },
-            repliesTitle() {
-                if (this.replies && !Object.is(this.replies.data, undefined)) {
-                    return `${this.replies.data.length} 条点评`
+            commentsTitle() {
+                if (this.comments && !Object.is(this.comments.items, undefined)) {
+                    return `${this.comments.items.length} 条点评`
                 } else {
                     return '还没有点评'
                 }
@@ -185,12 +186,6 @@
             contentTitle() {
                 return this.showContent ? '隐藏' : '显示'
             },
-            hasComments() {
-                // if (!Object.is(this.replies.data.length, undefined)) {
-                //   return true
-                // }
-                return this.replies.data.length > 0
-            }
         },
         methods: {
             handleShowPlayList(show) {
@@ -286,13 +281,22 @@
                 Tips.loaded();
                 // console.log(this.detail);
             },
-            async getReplies(id) {
-                this.replies = await postsApi.getReplies(id)
+            async getComments(id) {
+                this.comments = await postsApi.getComments(id)
+                if (!Object.is(this.comments.items, undefined)) {
+                    if (this.comments.items.length > 0) {
+                        this.hasComments = true;
+                    }
+                }
+                Tips.loaded();
             },
             bindSwiperChange(e) {
                 this.current = e.target.current
             },
             handleAddComment(e) {
+                uni.navigateTo({
+                    url: '/pages/comment'
+                })
                 // const url = `/pages/comment?postId=${this.detail.id}&title=${this.detail.title}`
                 // wx.navigateTo({url})
                 // this.$router.push({
@@ -316,7 +320,7 @@
             }
             this.showPlayer = false
             this.getDetail(query.id)
-            // this.getReplies(query.id)
+            this.getComments(query.id)
             this.view(query.id)
         },
         // async onLoad () {
@@ -330,7 +334,7 @@
     }
 </script>
 <style lang="scss">
-    Page, body {
+    page, body {
         background: #F5F5F7;
         font-size: 15px;
         color: #2d3848;
@@ -411,7 +415,7 @@
 
     }
 
-    .replies {
+    .comments {
         &__header {
         }
 
@@ -566,7 +570,7 @@
         width: 100% !important;
     }
 
-    .c-replies {
+    .c-comments {
         position: relative;
         margin-bottom: 60px;
 

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!--
     <div class="c-topbar">
       <button class="u-m-small c-btn c-btn--flat c-btn--small u-flex u-align-items-center "
               style="border: 1px solid #ededed; border-radius: 4px; text-align: left; background: #f5f5f5;">
@@ -11,7 +10,6 @@
         检索
       </button>
     </div>
-   -->
     <div style="position: relative; height: 280px;">
 
       <ad-swiper v-model="swiper" v-if="swiper" />
@@ -29,7 +27,8 @@
         </div>
       </div>
     </div>
-<!--    <div class="c-section__title">
+<!--
+<div class="c-section__title">
       热播
     </div>
     <div class="c-popular" v-if="popular">
@@ -54,7 +53,8 @@
     </div>
     <div class="u-flex u-align-items-center u-justify-center" v-else>
       <button class="c-btn c-btn&#45;&#45;flat c-btn&#45;&#45;large c-btn&#45;&#45;loading"></button>
-    </div>-->
+    </div>
+    -->
 
     <div class="c-section__title">
       最新

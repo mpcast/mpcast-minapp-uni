@@ -9,7 +9,7 @@ export default class Page {
     // 起始数据
     this.start = 1
     // 加载数据条数
-    this.pagesize = 10
+    this.limit = 10
     // 总数据数
     this.count = 0
     // 数据处理函数
@@ -34,7 +34,7 @@ export default class Page {
   async next (args) {
     const param = {
       page: this.start,
-      pagesize: this.pagesize
+      limit: this.limit
     }
     if (this.loading) {
       console.warn('page loading!')
@@ -75,7 +75,7 @@ export default class Page {
 
       this.start++
       // this.start += this.count
-      if (data.result.length < this.pagesize) {
+      if (data.result.length < this.limit) {
         this.reachBottom = true
       }
       return this

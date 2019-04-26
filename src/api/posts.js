@@ -121,11 +121,14 @@ export default class posts extends base {
    * 获取当前内容的评论回复
    * @returns {Promise.<void>}
    */
-  static async getReplies (postId) {
+  static async getComments (postId) {
     // TODO: 需要支持下拉加载与分页 @basil 1107
-    const url = `${this.appService}/posts/${postId}/replies`
+    const url = `${this.appService}/posts/${postId}/comments`
     const data = await this.get(url)
-    return data
+    data.result.items.forEach((item) => {
+      item.updatedAt = moment(item.updatedAt).fromNow()
+    })
+    return data.result
   }
 
   /**
@@ -133,8 +136,8 @@ export default class posts extends base {
    * @param postId
    * @returns {Promise.<void>}
    */
-  static async repliesNew (postId, postData) {
-    const url = `${this.appService}/posts/${postId}/replies/new`
+  static async commentsNew (postId, postData) {
+    const url = `${this.appService}/posts/${postId}/comments/new`
     const data = await this.post(url, postData)
     return data
   }
