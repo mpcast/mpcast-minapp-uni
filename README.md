@@ -21,20 +21,12 @@ A Podcast miniprogram project, 一款播课类小程序，以下内容为旧版�
 
 ## 系统部分截图
 
-### 细节决定体验，小程序不仅可以做到APP一致的效果，还能超越。
+<img src="https://github.com/caixie-ltd/cx-mp-podcast/blob/master/doc/screenshot/shot1?raw=true" title="" width="1024">
 
-<img src="https://caixie.top/assets/projects/podcast/case-podcast-5.png" title="Landing 页" width="375px">
-<img src="https://caixie.top/assets/projects/podcast/case-podcast-6.png" title="Landing 页" width="375px">
-<img src="https://caixie.top/assets/projects/podcast/case-podcast-7.png" title="Landing 页" width="375px">
+##
 
-### Landing 页
+<img src="https://github.com/caixie-ltd/cx-mp-podcast/blob/master/doc/screenshot/shot2?raw=true" title="" width="1024">
 
-<img src="https://caixie.top/assets/projects/podcast/case-podcast-1.png" title="Landing 页" width="375px">
-
-### 简洁的UI,不简单的交互,使家长能快速上手。
-<img src="https://caixie.top/assets/projects/podcast/case-podcast-2.png" title="精选页" width="375px">
-<img src="https://caixie.top/assets/projects/podcast/case-podcast-3.png" title="详情页及播放器" width="375px">
-<img src="https://github.com/baisheng/mp-podcast-mpvue/blob/master/doc/screenshot/IMG_1980.PNG?raw=true" title="播放列表" width="375px">
 
 ### 特色评论页，可以选择喜欢的色彩
 
