@@ -1,4 +1,5 @@
 {
+	"requiredBackgroundModes": ["audio"],
 	"pages": [
 		{
 			"path": "pages/landing",

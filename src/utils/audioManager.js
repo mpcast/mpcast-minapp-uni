@@ -10,7 +10,8 @@ const formatDuration = function (duration) {
   duration = new Date(duration)
   return formatNumber(duration.getMinutes()) + ':' + formatNumber(duration.getSeconds())
 }
-let globalAudioManager = wx.getBackgroundAudioManager()
+// let globalAudioManager = wx.getBackgroundAudioManager()
+let globalAudioManager = uni.getBackgroundAudioManager();
 
 export default class AudioManager {
   constructor (v, options) {
@@ -118,7 +119,7 @@ export default class AudioManager {
               singer: curAudio.author.user_nicename,
               avatar: curAudio.author.avatar,
               coverImgUrl: v.prototype.$audioStore.state.album.featured_image,
-              src: curAudio.url
+              src: curAudio.guid
             }
             v.prototype.$audioStore.commit('SET_AUDIO', curAudio)
           } else {
@@ -219,7 +220,7 @@ export default class AudioManager {
       singer: audioItem.author.user_nicename,
       avatar: audioItem.author.avatar,
       coverImgUrl: album.featured_image,
-      src: audioItem.url
+      src: audioItem.guid
     }
 
     this.setAudio(audio)

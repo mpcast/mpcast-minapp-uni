@@ -19,7 +19,7 @@
                     <div class="c-cell__bd">
                         <div class="c-special__author-info">
                             <span>{{detail.authorInfo.displayName}}</span>
-                            <span class="c-special__author-info__highlights" v-if="hasResume">{{detail.authorInfo.meta.resume.highlights}}</span>
+                            <span class="c-special__author-info__highlights" v-if="hasResume">{{detail.authorInfo.resume.highlights}}</span>
                         </div>
                     </div>
                     <div class="c-cell__ft"></div>
@@ -102,6 +102,7 @@
     import SliderPanel from '@/components/slider-panel'
     import PlayButton from '@/components/play-button'
     import {mapState, mapActions} from 'vuex'
+    import Tips from "@/utils/tips";
 
     const device = wx.getSystemInfoSync()  //  获取设备信息
     const dataArr = []
@@ -139,8 +140,8 @@
                 'audio'
             ]),
             hasResume() {
-                if (!Object.is(this.detail.author, undefined)) {
-                    const _author = this.detail.author
+                if (!Object.is(this.detail.authorInfo, undefined)) {
+                    const _author = this.detail.authorInfo
                     return !Object.is(_author.resume, undefined)
                 }
                 return false
@@ -281,7 +282,8 @@
             async getDetail(id) {
                 // this.detail = await postsApi.detail(id)
                 const data = await postsApi.detail(id)
-                this.detail = data.result
+                this.detail = data
+                Tips.loaded();
                 // console.log(this.detail);
             },
             async getReplies(id) {
@@ -293,13 +295,13 @@
             handleAddComment(e) {
                 // const url = `/pages/comment?postId=${this.detail.id}&title=${this.detail.title}`
                 // wx.navigateTo({url})
-                this.$router.push({
-                    path: "/pages/comment",
-                    query: {
-                        postId: this.detail.id,
-                        title: this.detail.title
-                    }
-                });
+                // this.$router.push({
+                //     path: "/pages/comment",
+                //     query: {
+                //         postId: this.detail.id,
+                //         title: this.detail.title
+                //     }
+                // });
             },
             view(id) {
                 postsApi.newView(id)
@@ -320,10 +322,10 @@
         // async onLoad () {
         // },
         onUnload() {
-            dataArr.pop()
-            const dataNum = dataArr.length
-            if (!dataNum) return
-            Object.assign(this.$data, dataArr[dataNum - 1])
+            // dataArr.pop()
+            // const dataNum = dataArr.length
+            // if (!dataNum) return
+            // Object.assign(this.$data, dataArr[dataNum - 1])
         }
     }
 </script>

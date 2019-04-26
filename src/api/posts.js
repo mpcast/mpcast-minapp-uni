@@ -45,7 +45,7 @@ export default class posts extends base {
   static async detail (id) {
     const url = `${this.appService}/posts/${id}`
     const data = await this.get(url)
-    return data
+    return data.result
   }
 
   /**

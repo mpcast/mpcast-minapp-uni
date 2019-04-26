@@ -60,6 +60,7 @@
       "urlCheck": false,
       "postcss": false
     },
-    "usingComponents": true
+    "usingComponents": true,
+    "requiredBackgroundModes": ["audio"]
   }
 }
