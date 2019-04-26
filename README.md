@@ -21,11 +21,11 @@ A Podcast miniprogram project, 一款播课类小程序，以下内容为旧版�
 
 ## 系统部分截图
 
-<img src="https://github.com/caixie-ltd/cx-mp-podcast/blob/master/doc/screenshot/shot1?raw=true" title="" width="1024">
+<img src="https://github.com/caixie-ltd/cx-mp-podcast/blob/master/doc/screenshot/shot1.png?raw=true" title="" width="1024">
 
 ##
 
-<img src="https://github.com/caixie-ltd/cx-mp-podcast/blob/master/doc/screenshot/shot2?raw=true" title="" width="1024">
+<img src="https://github.com/caixie-ltd/cx-mp-podcast/blob/master/doc/screenshot/shot2.png?raw=true" title="" width="1024">
 
 
 ### 特色评论页，可以选择喜欢的色彩
