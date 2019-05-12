@@ -27,6 +27,7 @@ export default class Auth extends Base {
         if (token) {
             try {
                 const {result} = await this.checkToken()
+                console.log('验证token')
                 if (result && result === 'ok') {
                     return true
                 }
@@ -100,7 +101,7 @@ export default class Auth extends Base {
      * 获取会话
      */
     static async getToken(jsCode) {
-        const url = `${this.baseUrl}/wechat/${jsCode}`
+        const url = `${this.baseUrl}/api/wechat/${jsCode}`
         const res = await this.get(url)
         if (res.status === 'success') {
             return res.result
@@ -111,8 +112,7 @@ export default class Auth extends Base {
      * 检查登录情况
      */
     static async checkToken() {
-        const url = `${this.baseUrl}/auth/check`
-
+        const url = `${this.appService}/auth/check`
         const data = await this.post(url)
         // {status: "success", message: "检测 Token成功", result: "ok"}
         return data
@@ -122,7 +122,7 @@ export default class Auth extends Base {
      * 服务端检查数据完整性
      */
     static async checkUserInfo(userInfo) {
-        const url = `${this.baseUrl}/wechat/verify`
+        const url = `${this.appService}/wechat/verify`
         // console.log(userInfo)
         const data = {
             // action: 'check_user_info',
@@ -152,7 +152,7 @@ export default class Auth extends Base {
      * 服务端解密用户信息
      */
     static async decryptUserInfo(userInfo) {
-        const url = `${this.baseUrl}/wechat/decrypt`
+        const url = `${this.appService}/wechat/decrypt`
         const param = {
             encryptedData: userInfo.encryptedData,
             iv: userInfo.iv

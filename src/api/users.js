@@ -6,7 +6,7 @@ import moment from 'moment'
 
 export default class Users extends Base {
   static baseUrl = 'http://localhost:5000';
-	static usersApi = `${this.baseUrl}/users`
+	static usersApi = `${this.appService}/users`
   /**
    * 根据类别获取回忆或故事
    */
